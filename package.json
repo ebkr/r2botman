@@ -1,0 +1,17 @@
+{
+  "name": "r2botman",
+  "version": "1.0.0",
+  "description": "r2modman discord bot",
+  "main": "src/bot.js",
+  "repository": "https://github.com/ebkr/r2botman",
+  "author": "Cade Ayres",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "adm-zip": "^0.4.16",
+    "discord.js": "^12.2.0",
+    "fs-extra": "^9.0.1",
+    "node-fetch": "^2.6.0",
+    "yaml": "^1.10.0"
+  }
+}
