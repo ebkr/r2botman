@@ -34,7 +34,7 @@ function handleProfileCodeModList(msg) {
                         const data = yaml.parse(entry.getData().toString());
                         const mods = new Array();
                         data.mods.forEach(mod => {
-                            mods.push(`${mod.name}-${mod.version.major}.${mod.version.minor}.${mod.version.patch}`)
+                            mods.push(`> ${mod.name}-${mod.version.major}.${mod.version.minor}.${mod.version.patch}`)
                         });
                         const modArrayDisplay = mods.join("\n");
                         msg.reply(`Here is the mod list for the provided code:\n${modArrayDisplay}`)
