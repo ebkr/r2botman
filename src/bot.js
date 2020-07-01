@@ -46,4 +46,10 @@ function handleProfileCodeModList(msg) {
     }
 }
 
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.write('r2botman');
+    res.end();
+}).listen(process.env.PORT || 8000);
+
 client.login(process.env.secretKey);
