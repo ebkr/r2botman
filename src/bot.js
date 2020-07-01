@@ -18,7 +18,6 @@ function handleProfileCodeModList(msg) {
     const searchPosition = msg.content.toLowerCase().search(new RegExp("!profile [a-zA-Z0-9]{8,10}"));
     if (searchPosition >= 0) {
         const code = msg.content.substr(searchPosition + ("!profile ").length).match("^[^\S]+")[0];
-        console.log("Code:", code)
         fetch(`https://hastebin-plus.herokuapp.com/raw/${code}`).then(value => value.text())
             .then(value => {
 
