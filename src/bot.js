@@ -4,6 +4,7 @@ const fs = require('fs-extra');
 const AdmZip = require('adm-zip');
 const fetch = require("node-fetch");
 const yaml = require('yaml');
+const http = require('http');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
