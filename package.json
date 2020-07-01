@@ -13,5 +13,8 @@
     "fs-extra": "^9.0.1",
     "node-fetch": "^2.6.0",
     "yaml": "^1.10.0"
+  },
+  "scripts": {
+    "start": "node src/bot.js"
   }
 }
