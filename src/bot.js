@@ -5,6 +5,7 @@ const AdmZip = require('adm-zip');
 const fetch = require("node-fetch");
 const yaml = require('yaml');
 const http = require('http');
+require('dotenv').config();
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -46,11 +47,5 @@ function handleProfileCodeModList(msg) {
         })
     }
 }
-
-http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.write('r2botman');
-    res.end();
-}).listen(process.env.PORT || 8000);
 
 client.login(process.env.secretKey);
