@@ -18,12 +18,12 @@ client.on('message', msg => {
 function handleProfileCodeModList(msg) {
     const searchPosition = msg.content.toLowerCase().search(new RegExp("!profile [a-zA-Z0-9]{8,10}"));
     if (searchPosition >= 0) {
-        const code = msg.content.substr(searchPosition + ("!profile ").length).match("^[^\S]+")[0];
+        const code = msg.content.substr(searchPosition + ("!profile ").length).match("[a-zA-Z0-9]{8,10}")[0];
         fetch(`https://r2modman-hastebin.herokuapp.com/raw/${code}`).then(value => value.text())
             .then(value => {
 
                 if (!value.startsWith("#r2modman")) {
-                    msg.reply("The code provided isn't a valid profile. Please re-export your code.");
+                    msg.reply(`The code provided isn't a valid profile. Please re-export your code.`);
                     return;
                 }
 
