@@ -16,9 +16,9 @@ client.on('message', msg => {
 });
 
 function handleProfileCodeModList(msg) {
-    const searchPosition = msg.content.toLowerCase().search(new RegExp("!profile [a-zA-Z0-9]{6,16}"));
+    const searchPosition = msg.content.toLowerCase().search(new RegExp("!profile [a-zA-Z0-9]+"));
     if (searchPosition >= 0) {
-        const code = msg.content.substr(searchPosition + ("!profile ").length).match("[a-zA-Z0-9]{6,16}")[0];
+        const code = msg.content.substr(searchPosition + ("!profile ").length).match(new RegExp("[a-zA-Z0-9]+"))[0];
         fetch(`https://r2modman-hastebin.herokuapp.com/raw/${code}`).then(value => value.text())
             .then(value => {
 
@@ -37,7 +37,19 @@ function handleProfileCodeModList(msg) {
                             mods.push(`> ${mod.name}-${mod.version.major}.${mod.version.minor}.${mod.version.patch}`)
                         });
                         const modArrayDisplay = mods.join("\n");
-                        msg.reply(`Here is the mod list for the provided code:\n${modArrayDisplay}`)
+                        const messageOutput = `Here is the mod list for the provided code:\n${modArrayDisplay}`;
+                        if (messageOutput.length > 2000) {
+                            fetch("https://r2modman-hastebin.herokuapp.com/documents", {
+                                method: "POST",
+                                body: modArrayDisplay
+                            }).then(resp => resp.json())
+                                .then(resp => {
+                                    const url = `https://r2modman-hastebin.herokuapp.com/${resp.key}`;
+                                    msg.reply(`Here is the mod list for the provided code:\n${url}`)
+                                });
+                        } else {
+                            msg.reply(`Here is the mod list for the provided code:\n${modArrayDisplay}`)
+                        }
                     }
                 });
 
