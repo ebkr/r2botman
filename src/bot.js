@@ -16,9 +16,9 @@ client.on('message', msg => {
 });
 
 function handleProfileCodeModList(msg) {
-    const searchPosition = msg.content.toLowerCase().search(new RegExp("!profile [a-zA-Z0-9]{8,10}"));
+    const searchPosition = msg.content.toLowerCase().search(new RegExp("!profile [a-zA-Z0-9]{6,16}"));
     if (searchPosition >= 0) {
-        const code = msg.content.substr(searchPosition + ("!profile ").length).match("[a-zA-Z0-9]{8,10}")[0];
+        const code = msg.content.substr(searchPosition + ("!profile ").length).match("[a-zA-Z0-9]{6,16}")[0];
         fetch(`https://r2modman-hastebin.herokuapp.com/raw/${code}`).then(value => value.text())
             .then(value => {
 
