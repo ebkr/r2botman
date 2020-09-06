@@ -12,7 +12,9 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    router(msg);
+    if (!msg.author.bot) {
+        router(msg);
+    }
 });
 
 function router(msg) {
@@ -77,7 +79,11 @@ function handleProfileCodeModList(msg) {
 function handleR2botmanCommand(msg) {
     msg.reply(
         "You can use the command `!profile [code]` to retrieve a list of mods from an exported profile code." +
+        "\n\n" +
+        "Example:" +
         "\n" +
+        "> !profile HQ9oz2kquE" +
+        "\n\n" +
         "To export your r2modman profile as a code:" +
         "\n• Navigate to the manager settings." +
         "\n• Find and click the `Export profile as code` setting");
