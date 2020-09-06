@@ -12,8 +12,22 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    handleProfileCodeModList(msg);
+    router(msg);
 });
+
+function router(msg) {
+    const definitions = {
+        r2botman: handleR2botmanCommand,
+        profile: handleProfileCodeModList
+    }
+    const keys = Object.keys(definitions);
+    for (let i=0; i < keys.length; i++) {
+        if (msg.content.toLowerCase().search(`!${keys[i]}`) >= 0) {
+            definitions[keys[i]](msg);
+            break;
+        }
+    }
+}
 
 function handleProfileCodeModList(msg) {
     const searchPosition = msg.content.toLowerCase().search(new RegExp("!profile [a-zA-Z0-9]+"));
@@ -58,6 +72,15 @@ function handleProfileCodeModList(msg) {
             console.log(reason);
         })
     }
+}
+
+function handleR2botmanCommand(msg) {
+    msg.reply(
+        "You can use the command `!profile [code]` to retrieve a list of mods from an exported profile code." +
+        "\n" +
+        "To export your r2modman profile as a code:" +
+        "\n• Navigate to the manager settings." +
+        "\n• Find and click the `Export profile as code` setting");
 }
 
 client.login(process.env.secretKey);
