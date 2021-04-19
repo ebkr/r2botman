@@ -50,7 +50,11 @@ function handleProfileCodeModList(msg) {
                         const data = yaml.parse(entry.getData().toString());
                         const mods = new Array();
                         data.mods.forEach(mod => {
-                            mods.push(`> ${mod.name}-${mod.version.major}.${mod.version.minor}.${mod.version.patch}`)
+                            if (mod.enabled) {
+                                mods.push(`> ${mod.name}-${mod.version.major}.${mod.version.minor}.${mod.version.patch}`);
+                            } else {
+                                mods.push(`> ~~${mod.name}-${mod.version.major}.${mod.version.minor}.${mod.version.patch}~~`);
+                            }
                         });
                         const modArrayDisplay = mods.join("\n");
                         const messageOutput = `Here is the mod list for the provided code:\n${modArrayDisplay}`;
@@ -61,10 +65,10 @@ function handleProfileCodeModList(msg) {
                             }).then(resp => resp.json())
                                 .then(resp => {
                                     const url = `https://r2modman-hastebin.herokuapp.com/${resp.key}`;
-                                    msg.reply(`Here is the mod list for the provided code:\n${url}`)
+                                    msg.reply(`Here is the mod list for the provided code:\n${url}`);
                                 });
                         } else {
-                            msg.reply(`Here is the mod list for the provided code:\n${modArrayDisplay}`)
+                            msg.reply(`Here is the mod list for the provided code:\n${modArrayDisplay}`);
                         }
                     }
                 });
